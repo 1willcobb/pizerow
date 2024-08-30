@@ -6,13 +6,23 @@ const port = 3000;
 
 // Use path.resolve to get absolute paths directly
 app.get('/', (req, res) => {
-  console.log("accessing the root path");
-  res.sendFile(path.resolve('index.html')); // Resolves to the current working directory + 'index.html'
+  console.log("Accessing the root path");
+  res.status(200).sendFile(path.resolve('index.html'), (err) => {
+    if (err) {
+      console.error("Error sending index.html:", err);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 });
 
 app.get('/new', (req, res) => {
-  console.log("accessing the new path");
-  res.sendFile(path.resolve('new.html')); // Resolves to the current working directory + 'new.html'
+  console.log("Accessing the new path");
+  res.status(200).sendFile(path.resolve('new.html'), (err) => {
+    if (err) {
+      console.error("Error sending new.html:", err);
+      res.status(500).send("Internal Server Error");
+    }
+  });
 });
 
 app.listen(port, () => {
