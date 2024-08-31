@@ -4,7 +4,9 @@ import path from 'path';
 const app = express();
 const port = 3000;
 
-// Use path.resolve to get absolute paths directly
+// Store the server start time
+const serverStartTime = Date.now();
+
 app.get('/', (req, res) => {
   console.log("Accessing the root path");
   res.status(200).sendFile(path.resolve('index.html'), (err) => {
@@ -23,6 +25,11 @@ app.get('/new', (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   });
+});
+
+// Endpoint to get server start time
+app.get('/start-time', (req, res) => {
+  res.json({ startTime: serverStartTime });
 });
 
 app.listen(port, () => {
