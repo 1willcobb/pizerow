@@ -1,7 +1,9 @@
 import express from 'express';
+import cors from 'cors';
 import path from 'path';
 
 const app = express();
+app.use(cors());
 const port = 3000;
 
 // Store the server start time
